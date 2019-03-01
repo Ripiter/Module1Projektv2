@@ -9,7 +9,7 @@ using System.DirectoryServices.AccountManagement;
 
 namespace Module1Projekt
 {
-    class Retrieve_all_info
+    class MainMenu
     {
         #region Static 
         static string userChoice; //Used in menu
@@ -19,17 +19,14 @@ namespace Module1Projekt
 
         static void Main(string[] args)
         {
+            
             CorrectPassword(); //When password is correct we get into this loop
             while (1 == 1) {
                 Console.Clear();
-                Console.WriteLine("Choose one");
-                Console.WriteLine("");
-                Console.WriteLine("[1] Find all information about user");
-                Console.WriteLine("");
-                Console.WriteLine("[2] Find information about all users");
-                Console.WriteLine("");
-                Console.WriteLine("[3] Update a user");
-                Console.WriteLine("");
+                Console.WriteLine("Choose one\r\n");
+                Console.WriteLine("[1] Find all information about user\r\n");
+                Console.WriteLine("[2] Find information about all users\r\n");
+                Console.WriteLine("[3] Update a user\r\n");
                 Console.Write("I choose: ");
                 userChoice = Console.ReadLine();
                 Console.Clear();
