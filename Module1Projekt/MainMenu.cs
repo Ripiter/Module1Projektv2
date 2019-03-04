@@ -86,10 +86,9 @@ namespace Module1Projekt
                 ///Dont hate for this
                 ///Will replace with a "correct version"
                 ///This is beta version of hiding password
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.CursorVisible = false;
+               
                 userConnetedPassword = Console.ReadLine();
-                Console.ForegroundColor = ConsoleColor.White;
+                
                 if (userConnected == "administrator" && userConnetedPassword == "Emil1234E")
                 {
                     privilage = false;
