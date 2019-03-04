@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.DirectoryServices;
 using System.DirectoryServices.AccountManagement;
-
+using System.Threading;
 
 namespace Module1Projekt
 {
@@ -71,58 +71,32 @@ namespace Module1Projekt
         static void CorrectPassword()
         {
             bool privilage = true;
+            int tries = 0;
             while (privilage)
             {
+
+                if (tries == 3)
+                {
+                    Console.WriteLine("u got locked out of the system for 60 seconds"); 
+                    Thread.Sleep(60000);
+                }
                 Console.Write("Name: ");
-                userConnected = Console.ReadLine();
+                userConnected = Console.ReadLine().ToLower();
                 Console.Write("Password: ");
                 ///Dont hate for this
                 ///Will replace with a "correct version"
                 ///This is beta version of hiding password
-                ////userConnetedPassword = null;
-                ////while (true)
-                ////{
-                ////    var key = Console.ReadKey(true);
-                ////    foreach (var e in key.Modifiers.ToString())
-                ////    {
-                ////        Console.Write("*");
-                ////    }
-                ////    if (key.Key == ConsoleKey.Enter)
-                ////        break;
-                ////    userConnetedPassword += key.KeyChar;
-                ////}
-                userConnetedPassword = "";
-                do
-                {
-                    ConsoleKeyInfo key = Console.ReadKey(true);
-                    // Backspace Should Not Work
-                    if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
-                    {
-                        userConnetedPassword += key.KeyChar;
-                        Console.Write("*");
-                    }
-                    else
-                    {
-                        if (key.Key == ConsoleKey.Backspace && userConnetedPassword.Length > 0)
-                        {
-                            userConnetedPassword = userConnetedPassword.Substring(0, (userConnetedPassword.Length - 1));
-                            Console.Write("\b \b");
-                        }
-                        else if (key.Key == ConsoleKey.Enter)
-                        {
-                            break;
-                        }
-                    }
-                } while (true);
-
-
-                if (userConnected == "Administrator" && userConnetedPassword == "Emil1234E")
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.CursorVisible = false;
+                userConnetedPassword = Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.White;
+                if (userConnected == "administrator" && userConnetedPassword == "Emil1234E")
                 {
                     privilage = false;
                 }
                 else
                 {
-                    Console.WriteLine("");
+                    tries++;
                     Console.WriteLine("Wrong");
                     Console.WriteLine("You wrote username:" + userConnected + ", Password:" + userConnetedPassword);
                     Console.ReadLine();
