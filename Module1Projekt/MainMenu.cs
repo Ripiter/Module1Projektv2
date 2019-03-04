@@ -5,31 +5,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.DirectoryServices;
 using System.DirectoryServices.AccountManagement;
-
+using System.Threading;
 
 namespace Module1Projekt
 {
-    class Retrieve_all_info
+    class MainMenu
     {
         #region Static 
         static string userChoice; //Used in menu
         static string userConnected;
         static string userConnetedPassword;
         #endregion
-
+        
         static void Main(string[] args)
         {
-            CorrectPassword(); //When password is correct we get into this loop
+            MainMenu b = new MainMenu();
+            
+            b.CorrectPassword(); //When password is correct we get into this loop
             while (1 == 1) {
                 Console.Clear();
-                Console.WriteLine("Choose one");
-                Console.WriteLine("");
-                Console.WriteLine("[1] Find all information about user");
-                Console.WriteLine("");
-                Console.WriteLine("[2] Find information about all users");
-                Console.WriteLine("");
-                Console.WriteLine("[3] Update a user");
-                Console.WriteLine("");
+                Console.WriteLine("Choose one\r\n");
+                Console.WriteLine("[1] Find all information about user\r\n");
+                Console.WriteLine("[2] Find information about all users\r\n");
+                Console.WriteLine("[3] Update a user\r\n");
+                Console.WriteLine("[4] Add user");
                 Console.Write("I choose: ");
                 userChoice = Console.ReadLine();
                 Console.Clear();
@@ -43,9 +42,12 @@ namespace Module1Projekt
         /// </summary>
         static void Menu()
         {
-            var prog = new UpdateUserInfo();
-            var find = new FindAllMail();
-            var info = new AllInfoAboutUser();
+
+            UpdateUserInfo prog = new UpdateUserInfo();
+            FindAllMail find = new FindAllMail();
+            AllInfoAboutUser info = new AllInfoAboutUser();
+            AddUser add = new AddUser();
+
             Console.Clear();
             switch (userChoice)
             {
@@ -58,6 +60,9 @@ namespace Module1Projekt
                 case "3":
                     prog.UpdateUser();
                     break;
+                case "4":
+                    add.AddNewUser();
+                    break;
                 default:
                     Console.WriteLine("Wrong input");
                     break;
@@ -68,26 +73,62 @@ namespace Module1Projekt
         /// Checks if userinput is correct "hardcode pass"
         /// I could not get it to work otherwise
         /// </summary>
-        static void CorrectPassword()
+        public void CorrectPassword()
         {
+
             bool privilage = true;
+            byte tries = 0;
             while (privilage)
             {
+
+                if (tries == 3)
+                {
+                    Console.WriteLine("u got locked out of the system for 60 seconds"); 
+                    Thread.Sleep(60000);
+                    tries = 0;
+                    Console.Clear();
+                }
                 Console.Write("Name: ");
-                userConnected = Console.ReadLine();
+                userConnected = Console.ReadLine().ToLower();
                 Console.Write("Password: ");
                 ///Dont hate for this
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.CursorVisible = false;
-                userConnetedPassword = Console.ReadLine();
-                Console.ForegroundColor = ConsoleColor.White;
-                if (userConnected == "Administrator" && userConnetedPassword == "Emil1234E")
+                ///Will replace with a "correct version"
+                ///This is beta version of hiding password
+                
+                userConnetedPassword = "";
+                while(true)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey(true);
+                    // Backspace Should Not Work
+                    if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+                    {
+                        userConnetedPassword += key.KeyChar;
+                        Console.Write("*");
+                    }
+                    else
+                    {
+                        if (key.Key == ConsoleKey.Backspace && userConnetedPassword.Length > 0)
+                        {
+                            userConnetedPassword = userConnetedPassword.Substring(0, (userConnetedPassword.Length - 1));
+                            Console.Write("\b \b");
+                        }
+                        else if (key.Key == ConsoleKey.Enter)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                if (userConnected == "administrator" && userConnetedPassword == "Emil1234E")
                 {
                     privilage = false;
                 }
                 else
                 {
+                    tries++;
+                    Console.WriteLine("");
                     Console.WriteLine("Wrong");
+                    Console.WriteLine("You wrote username:" + userConnected + ", Password:" + userConnetedPassword);
                     Console.ReadLine();
                 }
                 Console.Clear();
@@ -99,6 +140,7 @@ namespace Module1Projekt
         /// </summary>
         public DirectoryEntry createDirectoryEntry()
         {
+            
             ///Some other way we can connect in the future
             DirectoryEntry ldapConnection = new DirectoryEntry("LDAP://192.168.0.2", userConnected, userConnetedPassword, AuthenticationTypes.Secure);
 
