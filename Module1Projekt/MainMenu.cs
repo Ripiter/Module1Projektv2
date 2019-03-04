@@ -86,10 +86,31 @@ namespace Module1Projekt
                 ///Dont hate for this
                 ///Will replace with a "correct version"
                 ///This is beta version of hiding password
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.CursorVisible = false;
-                userConnetedPassword = Console.ReadLine();
-                Console.ForegroundColor = ConsoleColor.White;
+                
+                userConnetedPassword = "";
+                while(true)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey(true);
+                    // Backspace Should Not Work
+                    if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+                    {
+                        userConnetedPassword += key.KeyChar;
+                        Console.Write("*");
+                    }
+                    else
+                    {
+                        if (key.Key == ConsoleKey.Backspace && userConnetedPassword.Length > 0)
+                        {
+                            userConnetedPassword = userConnetedPassword.Substring(0, (userConnetedPassword.Length - 1));
+                            Console.Write("\b \b");
+                        }
+                        else if (key.Key == ConsoleKey.Enter)
+                        {
+                            break;
+                        }
+                    }
+                }
+
                 if (userConnected == "administrator" && userConnetedPassword == "Emil1234E")
                 {
                     privilage = false;
@@ -97,6 +118,7 @@ namespace Module1Projekt
                 else
                 {
                     tries++;
+                    Console.WriteLine("");
                     Console.WriteLine("Wrong");
                     Console.WriteLine("You wrote username:" + userConnected + ", Password:" + userConnetedPassword);
                     Console.ReadLine();
