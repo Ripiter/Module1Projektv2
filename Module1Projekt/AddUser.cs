@@ -56,6 +56,10 @@ namespace Module1Projekt
                     homeDir = @"\\MMDA.dk\Miljømærkering DK\Gul\Medarbejdere\";
                     break;
 
+                default:
+                    Console.WriteLine("Unknown input");
+                    break;
+
             }
             
 
