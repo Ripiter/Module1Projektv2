@@ -25,6 +25,8 @@ namespace Module1Projekt
             String first = Console.ReadLine();
             Console.WriteLine("enter Last Name");
             String last = Console.ReadLine();
+            Console.WriteLine("enter Initials");
+            String initials = Console.ReadLine();
             Console.WriteLine("enter Password");
             object[] password = { Console.ReadLine() };
             Console.WriteLine("Enter Group");
@@ -56,6 +58,10 @@ namespace Module1Projekt
                     homeDir = @"\\MMDA.dk\Miljømærkering DK\Gul\Medarbejdere\" + username;
                     break;
 
+                default:
+                    Console.WriteLine("Unknown input");
+                    break;
+
             }
             
 
@@ -64,7 +70,7 @@ namespace Module1Projekt
 
             try
             {
-                if (CreateUser(myLdapConnection, domain, first, last,
+                if (CreateUser(myLdapConnection, domain, first, last, initials,
                          password, groups, username, homeDrive, homeDir, true) == 0)
                 {
 
@@ -86,7 +92,7 @@ namespace Module1Projekt
             }
         }
 
-        static int CreateUser(DirectoryEntry myLdapConnection, String domain, String first,
+        static int CreateUser(DirectoryEntry myLdapConnection, String domain, String first, String initials,
                               String last, object[] password,
                               String[] groups, String username, String homeDrive,
                               String homeDir, bool enabled)
@@ -107,6 +113,9 @@ namespace Module1Projekt
 
             // Forename  
             user.Properties["givenname"].Add(first);
+
+            //Initials
+            user.Properties["initials"].Add(initials);
 
             // Display name  
             user.Properties["displayname"].Add(first + " " + last);
