@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.DirectoryServices;
 using System.DirectoryServices.AccountManagement;
-
+using System.Threading;
 
 namespace Module1Projekt
 {
@@ -71,10 +71,17 @@ namespace Module1Projekt
         static void CorrectPassword()
         {
             bool privilage = true;
+            int tries = 0;
             while (privilage)
             {
+
+                if (tries == 3)
+                {
+                    Console.WriteLine("u got locked out of the system for 60 seconds"); 
+                    Thread.Sleep(60000);
+                }
                 Console.Write("Name: ");
-                userConnected = Console.ReadLine();
+                userConnected = Console.ReadLine().ToLower();
                 Console.Write("Password: ");
                 ///Dont hate for this
                 ///Will replace with a "correct version"
@@ -83,12 +90,13 @@ namespace Module1Projekt
                 Console.CursorVisible = false;
                 userConnetedPassword = Console.ReadLine();
                 Console.ForegroundColor = ConsoleColor.White;
-                if (userConnected == "Administrator" && userConnetedPassword == "Emil1234E")
+                if (userConnected == "administrator" && userConnetedPassword == "Emil1234E")
                 {
                     privilage = false;
                 }
                 else
                 {
+                    tries++;
                     Console.WriteLine("Wrong");
                     Console.WriteLine("You wrote username:" + userConnected + ", Password:" + userConnetedPassword);
                     Console.ReadLine();
