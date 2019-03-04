@@ -187,9 +187,5 @@ namespace Module1Projekt
             return 0;
         }
 
-        /// <summary>
-        /// Connection for our AD
-        /// </summary>
-
     }
 }
