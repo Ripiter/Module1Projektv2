@@ -16,7 +16,7 @@ namespace Module1Projekt
         /// </summary>
         public void FindAllUsers()
         {
-            var connection = new Retrieve_all_info();
+            MainMenu connection = new MainMenu();
             Console.Write("Enter property example initials or mail: ");
             String property = Console.ReadLine(); /// enters a property like a mail or ini 
 

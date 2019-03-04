@@ -41,7 +41,7 @@ namespace Module1Projekt
 
             try
             {
-                var conn = new Retrieve_all_info();
+                MainMenu conn = new MainMenu();
                 
                 DirectoryEntry myLdapConnection = conn.createDirectoryEntry(); /// makes the connection
 
