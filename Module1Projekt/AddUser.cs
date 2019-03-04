@@ -15,8 +15,8 @@ namespace Module1Projekt
         public void AddNewUser()
         {
             // connect to LDAP  
-
-            DirectoryEntry myLdapConnection = CreateDirectoryEntry();
+            MainMenu conn = new MainMenu();
+            DirectoryEntry myLdapConnection = conn.createDirectoryEntry();
 
             // define vars for user  
 
@@ -38,33 +38,8 @@ namespace Module1Projekt
             Console.WriteLine("Choose home directory \n[1] Blå \n[2] Grøn - Adminstrativ \n[3] Grøn - Konsulenter \n[4] Gul");
 
             //choosing home directory
-            string homeDir = "";
-            string dirInput = Console.ReadLine();
-            switch (dirInput)
-            {
-                case "1":
-                    homeDir = @"\\MMDA.dk\Miljømærkering DK\Blå\Medarbejdere\" + username;
-                    break;
-
-                case "2":
-                    homeDir = @"\\MMDA.dk\Miljømærkering DK\Grøn\Grøn\Adminstrativ\Medarbejdere\" + username;
-                    break;
-
-                case "3":
-                    homeDir = @"\\MMDA.dk\Miljømærkering DK\Grøn\Grøn\Konsulenter\Medarbejdere\" + username;
-                    break;
-
-                case "4":
-                    homeDir = @"\\MMDA.dk\Miljømærkering DK\Gul\Medarbejdere\" + username;
-                    break;
-
-                default:
-                    Console.WriteLine("Unknown input");
-                    break;
-
-            }
             
-
+            string homeDir = "";
 
             // create user  
 
@@ -215,21 +190,6 @@ namespace Module1Projekt
         /// <summary>
         /// Connection for our AD
         /// </summary>
-        static DirectoryEntry CreateDirectoryEntry()
-        {
-            // create and return new LDAP connection with desired settings  
 
-
-            ///Some other way we can connect in the future
-            DirectoryEntry ldapConnection = new DirectoryEntry("LDAP://192.168.0.2", "Administrator", "Emil1234E", AuthenticationTypes.Secure);
-
-
-            //DirectoryEntry ldapConnection = new DirectoryEntry("MMDA.DK");
-            ///We only need a path if we want to be very specific in what OU we want to look for
-            //ldapConnection.Path = "LDAP://OU=Miljømærkering DK,DC=MMDA,DC=dk"; ///We are searching for it in miljømærkering
-            ldapConnection.AuthenticationType = AuthenticationTypes.Secure; ///makes secure connetion?
-
-            return ldapConnection;
-        }
     }
 }
