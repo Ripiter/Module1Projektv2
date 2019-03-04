@@ -19,8 +19,9 @@ namespace Module1Projekt
         
         static void Main(string[] args)
         {
+            MainMenu b = new MainMenu();
             
-            CorrectPassword(); //When password is correct we get into this loop
+            b.CorrectPassword(); //When password is correct we get into this loop
             while (1 == 1) {
                 Console.Clear();
                 Console.WriteLine("Choose one\r\n");
@@ -40,9 +41,9 @@ namespace Module1Projekt
         /// </summary>
         static void Menu()
         {
-            var prog = new UpdateUserInfo();
-            var find = new FindAllMail();
-            var info = new AllInfoAboutUser();
+            AllInfoAboutUser info = new AllInfoAboutUser();
+            FindAllMail find = new FindAllMail();
+            UpdateUserInfo prog = new UpdateUserInfo();
             Console.Clear();
             switch (userChoice)
             {
@@ -68,8 +69,9 @@ namespace Module1Projekt
         /// Checks if userinput is correct "hardcode pass"
         /// I could not get it to work otherwise
         /// </summary>
-        static void CorrectPassword()
+        public void CorrectPassword()
         {
+
             bool privilage = true;
             int tries = 0;
             while (privilage)
@@ -132,6 +134,7 @@ namespace Module1Projekt
         /// </summary>
         public DirectoryEntry createDirectoryEntry()
         {
+            
             ///Some other way we can connect in the future
             DirectoryEntry ldapConnection = new DirectoryEntry("LDAP://192.168.0.2", userConnected, userConnetedPassword, AuthenticationTypes.Secure);
 
