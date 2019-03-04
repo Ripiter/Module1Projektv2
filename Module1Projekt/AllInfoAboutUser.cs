@@ -18,7 +18,7 @@ namespace Module1Projekt
         public void FindAllInfo()
         {
      //       Module1Projekt.Retrieve_all_info test = new Retrieve_all_info(); //For you emil
-            var test = new MainMenu();         //Getting connection string
+            MainMenu test = new MainMenu();         //Getting connection string
             DirectorySearcher search;
             Console.Write("Enter user fx. Jakob JAWA. Waidow: ");
             String username = Console.ReadLine();

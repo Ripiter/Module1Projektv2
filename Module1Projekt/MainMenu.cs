@@ -16,7 +16,7 @@ namespace Module1Projekt
         static string userConnected;
         static string userConnetedPassword;
         #endregion
-
+        
         static void Main(string[] args)
         {
             
@@ -55,6 +55,9 @@ namespace Module1Projekt
                 case "3":
                     prog.UpdateUser();
                     break;
+                case "4":
+                    Console.WriteLine("DLC comming soon");
+                    break;
                 default:
                     Console.WriteLine("Wrong input");
                     break;
@@ -74,6 +77,8 @@ namespace Module1Projekt
                 userConnected = Console.ReadLine();
                 Console.Write("Password: ");
                 ///Dont hate for this
+                ///Will replace with a "correct version"
+                ///This is beta version of hiding password
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.CursorVisible = false;
                 userConnetedPassword = Console.ReadLine();
@@ -85,6 +90,7 @@ namespace Module1Projekt
                 else
                 {
                     Console.WriteLine("Wrong");
+                    Console.WriteLine("You wrote username:" + userConnected + ", Password:" + userConnetedPassword);
                     Console.ReadLine();
                 }
                 Console.Clear();
