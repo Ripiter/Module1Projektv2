@@ -31,10 +31,7 @@ namespace Module1Projekt
                 default:
                     Console.WriteLine("Wrong input");
                     return;
-                    break;
             }
-
-
 
             Console.Write("Enter user fx. jakob jawa. waidow: ");
             String username = Console.ReadLine();
@@ -78,7 +75,7 @@ namespace Module1Projekt
                 else Console.WriteLine("User not found!"); //if we dident find any user
             }
 
-            catch (Exception e)
+            catch (Exception)
             {
                 Console.WriteLine("Cant be empty");
             }

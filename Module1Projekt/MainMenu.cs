@@ -28,6 +28,7 @@ namespace Module1Projekt
                 Console.WriteLine("[1] Find all information about user\r\n");
                 Console.WriteLine("[2] Find information about all users\r\n");
                 Console.WriteLine("[3] Update a user\r\n");
+                Console.WriteLine("[4] Add user");
                 Console.Write("I choose: ");
                 userChoice = Console.ReadLine();
                 Console.Clear();
@@ -41,9 +42,12 @@ namespace Module1Projekt
         /// </summary>
         static void Menu()
         {
-            AllInfoAboutUser info = new AllInfoAboutUser();
-            FindAllMail find = new FindAllMail();
+
             UpdateUserInfo prog = new UpdateUserInfo();
+            FindAllMail find = new FindAllMail();
+            AllInfoAboutUser info = new AllInfoAboutUser();
+            AddUser add = new AddUser();
+
             Console.Clear();
             switch (userChoice)
             {
@@ -57,7 +61,7 @@ namespace Module1Projekt
                     prog.UpdateUser();
                     break;
                 case "4":
-                    Console.WriteLine("DLC comming soon");
+                    add.AddNewUser();
                     break;
                 default:
                     Console.WriteLine("Wrong input");
@@ -73,7 +77,7 @@ namespace Module1Projekt
         {
 
             bool privilage = true;
-            int tries = 0;
+            byte tries = 0;
             while (privilage)
             {
 
@@ -81,6 +85,8 @@ namespace Module1Projekt
                 {
                     Console.WriteLine("u got locked out of the system for 60 seconds"); 
                     Thread.Sleep(60000);
+                    tries = 0;
+                    Console.Clear();
                 }
                 Console.Write("Name: ");
                 userConnected = Console.ReadLine().ToLower();
