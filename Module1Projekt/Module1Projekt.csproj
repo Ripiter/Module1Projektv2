@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddUser.cs" />
     <Compile Include="AllInfoAboutUser.cs" />
     <Compile Include="FindAllMail.cs" />
     <Compile Include="UpdateUserInfo.cs" />
