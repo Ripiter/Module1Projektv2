@@ -32,7 +32,32 @@ namespace Module1Projekt
             Console.WriteLine("enter Username");
             String username = Console.ReadLine();
             String homeDrive = "C:";
-            String homeDir = @"\\MMDA.dk\Miljømærkering DK\Users\" + username;
+
+            Console.WriteLine("Choose home directory \n[1] Blå \n[2] Grøn - Adminstrativ \n[3] Grøn - Konsulenter \n[4] Gul");
+            
+            //choosing home directory
+            string dirInput = Console.ReadLine();
+            switch (dirInput)
+            {
+                case "1":
+                    string homeDirInput = @"Blå\Medarbejdere\";
+                    break;
+
+                case "2":
+                    string homeDirInput = @"Grøn\Grøn\Adminstrativ\Medarbejdere\";
+                    break;
+
+                case "3":
+                    string homeDirInput = @"Grøn\Grøn\Konsulenter\Medarbejdere\";
+                    break;
+
+                case "4":
+                    string homeDirInput = @"Gul\Medarbejdere\";
+                    break;
+
+            }
+            String homeDir = @"\\MMDA.dk\Miljømærkering DK\" + homeDirInput + username;
+
 
             // create user  
 
