@@ -12,7 +12,7 @@ namespace Module1Projekt
 {
     class AddUser
     {
-        static void AddNewUser(string[] args)
+        public void AddNewUser()
         {
             // connect to LDAP  
 
@@ -36,7 +36,7 @@ namespace Module1Projekt
             Console.WriteLine("Choose home directory \n[1] Blå \n[2] Grøn - Adminstrativ \n[3] Grøn - Konsulenter \n[4] Gul");
 
             //choosing home directory
-            String homeDir;
+            string homeDir = "";
             string dirInput = Console.ReadLine();
             switch (dirInput)
             {
@@ -45,15 +45,15 @@ namespace Module1Projekt
                     break;
 
                 case "2":
-                    homeDir = @"\\MMDA.dk\Miljømærkering DK\Grøn\Grøn\Adminstrativ\Medarbejdere\";
+                    homeDir = @"\\MMDA.dk\Miljømærkering DK\Grøn\Grøn\Adminstrativ\Medarbejdere\" + username;
                     break;
 
                 case "3":
-                    homeDir = @"\\MMDA.dk\Miljømærkering DK\Grøn\Grøn\Konsulenter\Medarbejdere\";
+                    homeDir = @"\\MMDA.dk\Miljømærkering DK\Grøn\Grøn\Konsulenter\Medarbejdere\" + username;
                     break;
 
                 case "4":
-                    homeDir = @"\\MMDA.dk\Miljømærkering DK\Gul\Medarbejdere\";
+                    homeDir = @"\\MMDA.dk\Miljømærkering DK\Gul\Medarbejdere\" + username;
                     break;
 
             }
