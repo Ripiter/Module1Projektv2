@@ -73,7 +73,7 @@ namespace Module1Projekt
         {
 
             bool privilage = true;
-            int tries = 0;
+            byte tries = 0;
             while (privilage)
             {
 
@@ -81,6 +81,8 @@ namespace Module1Projekt
                 {
                     Console.WriteLine("u got locked out of the system for 60 seconds"); 
                     Thread.Sleep(60000);
+                    tries = 0;
+                    Console.Clear();
                 }
                 Console.Write("Name: ");
                 userConnected = Console.ReadLine().ToLower();
